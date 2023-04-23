@@ -2,8 +2,7 @@
     error_reporting(E_ALL^E_STRICT);
     ini_set('display_errors', 'on');
     ini_set('date.timezone','America/Mexico_City');
-//    include_once 'mysql.php';
-    include("terminarConsulta.php");
+    include("scripts-php/mysql-consulta.php");
 
     $mysql_consulta = new mysql_consulta();
 
@@ -21,9 +20,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Pagina con formulario que se llena durante una consulta">
-    <title> Consulta </title>
+    <title> Consulta</title>
     <link href="styles/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href=Constyle.css>
+    <link rel="stylesheet" href="styles/consulta.css">
     <script src="https://kit.fontawesome.com/b85031486b.js" crossorigin="anonymous"></script>
 </head>
 
@@ -36,7 +35,7 @@
         <label for="menu" class="fa-solid fa-bars"></label>
 
         <nav class="navbar">
-            <a href="Principalindex.html">Regresar</a>
+            <a href="principal.html">Regresar</a>
             <a href="#">Guardar</a>
         </nav>
     </header>

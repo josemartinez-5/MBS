@@ -23,7 +23,7 @@ html{
 }
 
 body{
-    background: url(fondoestudio.jpg) no-repeat;
+    background: url(../images/fondoestudio.jpg) no-repeat;
     background-size: cover;
     background-position: center;
 }
