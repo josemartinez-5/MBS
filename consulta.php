@@ -4,7 +4,7 @@
     ini_set('date.timezone','America/Mexico_City');
     include 'scripts-php/mysql-consulta.php';
 
-    var_dump($_POST);
+    //var_dump($_POST);
 ?>
 
 <!DOCTYPE html>
@@ -22,7 +22,7 @@
 </head>
 
 <body>
-    <header hidden>
+    <header>
         <a href="#" class="logo">
             <span>M&B&S</span> Mint, Body and Spirit
         </a>
