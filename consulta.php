@@ -2,14 +2,9 @@
     error_reporting(E_ALL^E_STRICT);
     ini_set('display_errors', 'on');
     ini_set('date.timezone','America/Mexico_City');
-    include("scripts-php/mysql-consulta.php");
+    include 'scripts-php/mysql-consulta.php';
 
-    $mysql_consulta = new mysql_consulta();
-
-    if(!empty($_POST)){
-        $mysql_consulta->terminar_consulta();
-        var_dump($_POST);
-    }
+    var_dump($_POST);
 ?>
 
 <!DOCTYPE html>
@@ -48,7 +43,7 @@
         </div>
     </div>
 
-    <form method = "POST" enctype="multipart/form-data" autocomplete="off">
+    <form method="POST" enctype="multipart/form-data" autocomplete="off">
 <!-- Ficha de identificación -->
         <div class="container my-4 ms-2 formulario">
             <h2><b>Ficha de identificación</b></h2>
@@ -57,16 +52,20 @@
                     <label for="paciente_nombre">
                         <span>Nombre completo: </span>
                     </label>
-                    <input type="text" id="paciente_nombre" name="paciente_nombre" size="40">
+                    <?php
+                        echo '<input type="text" id="paciente_nombre" name="paciente_nombre" size="40" value="'.$paciente_nombre.'">';
+                    ?>
                 </div>
                 <div class="col-4">
                     <label for="fecha_1consulta">
                         <span>Fecha de 1a consulta: </span>
                     </label>
-                    <input type="date" id="fecha_1consulta" name="fecha_1consulta" max="" value="">
+                    <?php
+                        echo '<input type="date" id="fecha_1consulta" name="fecha_1consulta" max="" value="'.$fecha_1consulta.'">';
+                    ?>
                 </div>
                 <div class="col">
-                    <button type="submit" style="padding-inline: 5px 5px;">Buscar paciente</button>
+                    <button type="submit" style="padding-inline: 5px 5px;" name="buscar_paciente">Buscar paciente</button>
                 </div>
             </div>
             <div class="row row-cols-auto">
@@ -74,8 +73,10 @@
                     <label for="paciente_nombre_comun">
                         <span>Nombre común: </span>
                     </label>
-                    <input type="text" id="paciente_nombre_comun" name="paciente_nombre_comun" size="40"
-                    placeholder="¿Cómo quiere el paciente que le llamen?">
+                    <?php
+                        echo '<input type="text" id="paciente_nombre_comun" name="paciente_nombre_comun" size="40"
+                        placeholder="¿Cómo quiere el paciente que le llamen?" value="'.$paciente_nombre_comun.'">';
+                    ?>
                 </div>
             </div>
             <div class="row row-cols-auto">
@@ -83,17 +84,22 @@
                     <label for="paciente_tel">
                         <span>Teléfono: </span>
                     </label>
-                    <input type="tel" id="paciente_tel" name="paciente_tel" size="12">
+                    <?php
+                        echo '<input type="tel" id="paciente_tel" name="paciente_tel" size="12" value="'.$paciente_tel.'">';
+                    ?>
                 </div>
                 <div class="col">
                     <label for="paciente_tel_tipo">
                         <span>Tipo: </span>
                     </label>
-                    <input type="text" id="paciente_tel_tipo" name="paciente_tel_tipo"
-                    placeholder="Móvil, casa, WhatsApp, etc." size="25">
+                    <?php
+                        echo '<input type="text" id="paciente_tel_tipo" name="paciente_tel_tipo"
+                        placeholder="Móvil, casa, WhatsApp, etc." size="25" value="'.$paciente_tel_tipo.'">';
+                    ?>
                 </div>
                 <div class="col">
-                    <button type="submit" style="padding-inline: 5px 5px;">Agregar otro teléfono</button>
+                    <!-- Se habilitará en otro momento este botón -->
+                    <button type="submit" style="padding-inline: 5px 5px;" hidden>Agregar otro teléfono</button>
                 </div>
             </div>
             <div class="row row-cols-auto">
@@ -101,7 +107,9 @@
                     <label for="paciente_email">
                         <span>Email: </span>
                     </label>
-                    <input type="email" id="paciente_email" name="paciente_email" size="50">
+                    <?php
+                        echo '<input type="email" id="paciente_email" name="paciente_email" size="50" value="'.$paciente_email.'">';
+                    ?>
                 </div>
             </div>
             <div class="row row-cols-auto">
@@ -109,7 +117,9 @@
                     <label for="paciente_direccion">
                         <span>Dirección: </span>
                     </label>
-                    <input type="text" id="paciente_direccion" name="paciente_direccion" size="80">
+                    <?php
+                        echo '<input type="text" id="paciente_direccion" name="paciente_direccion" size="80" value="'.$paciente_direccion.'">';
+                    ?>
                 </div>
             </div>
             <div class="row row-cols-auto">
@@ -117,13 +127,17 @@
                     <label for="paciente_fecha_nac">
                         <span>Fecha de nacimiento: </span>
                     </label>
-                    <input type="date" id="paciente_fecha_nac" name="paciente_fecha_nac" max="">
+                    <?php
+                        echo '<input type="date" id="paciente_fecha_nac" name="paciente_fecha_nac" max="" value="'.$paciente_fecha_nac.'">';
+                    ?>
                 </div>
                 <div class="col">
                     <label for="paciente_edad">
                         <span>Edad: </span>
                     </label>
-                    <input type="number" id="paciente_edad" name="paciente_edad">
+                    <?php
+                        echo '<input type="number" id="paciente_edad" name="paciente_edad" value="'.$paciente_edad.'">';
+                    ?>
                     <span>años</span>
                 </div>
             </div>
@@ -131,13 +145,23 @@
                 <div class="col">
                     <span>¿Hijos? </span>
                     <label for="paciente_hijos_status_si">
-                        <input type="radio" id="paciente_hijos_status_si" name="paciente_hijos_status"
-                        value="1">
+                    <?php
+                        echo '<input type="radio" id="paciente_hijos_status_si" name="paciente_hijos_status" value="1"';
+                        if($paciente_hijos_status==1){
+                            echo ' checked ';
+                        }
+                        echo '>';
+                    ?>
                         Sí
                     </label>
                     <label for="paciente_hijos_status_no">
-                        <input type="radio" id="paciente_hijos_status_no" name="paciente_hijos_status"
-                        value="0">
+                    <?php
+                        echo '<input type="radio" id="paciente_hijos_status_no" name="paciente_hijos_status" value="0"';
+                        if($paciente_hijos_status==0){
+                            echo ' checked ';
+                        }
+                        echo '>';
+                    ?>
                         No
                     </label>
                 </div>
@@ -145,7 +169,9 @@
                     <label for="paciente_ocupacion">
                         <span>Ocupación: </span>
                     </label>
-                    <input type="text" id="paciente_ocupacion" name="paciente_ocupacion">
+                    <?php
+                        echo '<input type="text" id="paciente_ocupacion" name="paciente_ocupacion" value="'.$paciente_ocupacion.'">';
+                    ?>
                 </div>
             </div>
             <h3><b>Inmunización</b></h3>
@@ -177,7 +203,8 @@
             </div>
             <div class="row row-cols-auto">
                 <div class="col">
-                    <button type="submit" style="padding-inline: 5px 5px;">Agregar otra vacuna</button>
+                    <!-- Se habilitará en otro momento este botón -->
+                    <button type="submit" style="padding-inline: 5px 5px;" hidden>Agregar otra vacuna</button>
                 </div>
             </div>
         </div>
@@ -194,9 +221,13 @@
                 </div>
                 <div class="col">
                     <label for="num_consulta">
-                        <span>Consulta #</span>
+                    <?php
+                        echo '<span>Consulta #'.$num_consulta.'</span>';
+                    ?>
                     </label>
-                    <input type="number" id="num_consulta" name="num_consulta" value="0" maxlength="3">
+                <?php
+                    echo '<input type="number" id="num_consulta" name="num_consulta" value="'.$num_consulta.'" hidden>';
+                ?>
                 </div>
             </div>
         </div>
@@ -237,7 +268,7 @@
                         <span>APP-TX: </span>
                     </label><br>
                     <textarea class="largeinput" id="APP-TX" name="APP-TX"
-                    rows="4"></textarea>
+                    rows="4"><?php echo $APP_TX; ?></textarea>
                 </div>
             </div>
             <div class="row row-cols-auto">
@@ -245,7 +276,9 @@
                     <label for="HEA">
                         <span>Historia de enfermedad actual (HEA): </span>
                     </label><br>
-                    <textarea class="largeinput" id="HEA" name="HEA" rows="4"></textarea>
+                    <textarea class="largeinput" id="HEA" name="HEA" rows="4"><?php
+                        echo $HEA;
+                    ?></textarea>
                 </div>
             </div>
             <div class="row row-cols-auto">
@@ -273,37 +306,17 @@
                     <label for="AHF">
                         <span>AHF: </span>
                     </label><br>
-                    <textarea class="largeinput" id="AHF" name="AHF" rows="15">
-Artritis
-Cáncer
-Cardiopatías
-Colesterol/triglicéridos
-Diabetes
-HTA
-Epilepsia
-Malformaciones
-Obesidad
-Trastornos mentales
-Toxicomanías
-ITS
-Tuberculosis
-Otros
-Fallecimientos, edad y causa</textarea>
+                    <textarea class="largeinput" id="AHF" name="AHF" rows="15"><?php
+                        echo $AHF;
+                    ?></textarea>
                 </div>
                 <div class="col">
                     <label for="APNP">
                         <span>APNP: </span>
                     </label><br>
-                    <textarea class="largeinput" id="APNP" name="APNP" rows="9">
-Ejercicio
-Grupo Sanguíneo
-Hospitalizado
-Adicciones: tabaco, alcohol, café
-Método anticonceptivo
-Comidas al día
-Convivencia con animales
-Dieta diaria
-Inmunizaciones recientes</textarea>
+                    <textarea class="largeinput" id="APNP" name="APNP" rows="9"><?php
+                        echo $APNP;
+                    ?></textarea>
                 </div>
             </div>
             <div class="row row-cols-auto">
@@ -311,33 +324,17 @@ Inmunizaciones recientes</textarea>
                     <label for="APP">
                         <span>APP: </span>
                     </label><br>
-                    <textarea class="largeinput" id="APP" name="APP" rows="13">
-Estudios de laboratorio
-Transfusiones de sangre
-Enfermedades actuales
-Alergias
-Asma
-Artritis
-Cáncer
-Hepátitis
-Colesterol/triglícéridos
-Diabetes
-HTA
-Malformaciones
-Trastornos</textarea>
+                    <textarea class="largeinput" id="APP" name="APP" rows="13"><?php
+                        echo $APP;
+                    ?></textarea>
                 </div>
                 <div class="col">
                     <label for="AGO">
                         <span>AGO: </span>
                     </label><br>
-                    <textarea class="largeinput" id="AGO" name="AGO" rows="7">
-Menarca
-Método anticonceptivo
-Fecha última menstruación
-Partos (césarea, natural, abortos)
-ITS
-Infertilidad
-Estudio Papanicolau</textarea>
+                    <textarea class="largeinput" id="AGO" name="AGO" rows="7"><?php
+                        echo $AGO;
+                    ?></textarea>
                 </div>
             </div>
             <h3><b>IAS</b></h3>
@@ -635,11 +632,11 @@ Articulaciones</textarea>
         </div>
 
         <div class="container ms-2 ultimo">
-            <button class="submit" type="submit">Redactar receta</button>
-            <button class="submit" type="submit">Terminar consulta</button>
+            <button class="submit" type="submit" name="redactar_receta">Redactar receta</button>
+            <button class="submit" type="submit" name="terminar_consulta">Terminar consulta</button>
         </div>
     </form>
-
+    <script src="scripts-js/fecha-actual-consulta.js"></script>
 </body>
 
 </html>
