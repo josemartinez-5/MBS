@@ -179,9 +179,9 @@ CREATE TABLE `paciente` (
   `APNP` varchar(800) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `APP` varchar(800) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `AGO` varchar(800) DEFAULT NULL,
-  `proxima_consulta` int DEFAULT NULL,
-  `periodicidad` datetime DEFAULT NULL,
-  `posibles` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `proxima_consulta` datetime DEFAULT NULL,
+  `periodicidad` int DEFAULT NULL,
+  `posibles` varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   PRIMARY KEY (`paciente_nombre`,`fecha_1consulta`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -230,4 +230,4 @@ CREATE TABLE `tratamiento` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-04-22 20:42:28
+-- Dump completed on 2023-04-23 21:45:20
