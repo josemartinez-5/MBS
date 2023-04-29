@@ -6,7 +6,7 @@ class mysql {
         $host = "localhost";
         $user = "root2";
         $bd = "mbs";
-        $pass = "SeraTemporal#7";
+        $pass = "";
         $port = 3306;
         $socket = "/var/run/mysqld/mysqld.sock";
         
