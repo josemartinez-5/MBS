@@ -4,6 +4,7 @@
     ini_set('date.timezone','America/Mexico_City');
     include 'scripts-php/mysql-consulta.php';
     
+    $estados = consulta_estados();
     //var_dump($_POST);
 ?>
 
@@ -19,6 +20,7 @@
     <link href="styles/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="styles/consulta.css">
     <script src="https://kit.fontawesome.com/b85031486b.js" crossorigin="anonymous"></script>
+    <script src="scripts-js/jquery-3.6.4.min.js"></script>
 </head>
 
 <body>
@@ -134,20 +136,105 @@
                     ?>
                 </div>
             </div>
+            <br>
+            <h3><b>Dirección</b></h3>
             <div class="row row-cols-auto">
-                <div class="col">
-                    <label for="paciente_direccion">
-                        <span>Dirección: </span>
+                <div class="col" id="col-cp">
+                    <label for="paciente_dir_cp">
+                        <span>Código postal: </span>
                     </label>
-                    <?php
-                        echo '<input type="text" id="paciente_direccion" name="paciente_direccion" size="80" value="';
-                        if(isset($_POST['paciente_direccion'])){
-                            echo $_POST['paciente_direccion'];
+                    <input type="text" id="paciente_dir_cp" name="paciente_dir_cp" pattern="[0-9]{5}" value="<?php
+                        if(isset($_POST['paciente_dir_cp'])){
+                            echo $_POST['paciente_dir_cp'];
                         }
-                        echo '">';
-                    ?>
+                    ?>">
+                </div>
+                <div class="col">
+                    <label for="paciente_dir_estado">
+                        <span>Estado: </span>
+                    </label>
+                    <select type="text" id="paciente_dir_estado" name="paciente_dir_estado">
+                        <option value="0">---</option>
+                        <?php
+                            if(isset($_POST['paciente_dir_estado']))
+                                while($row = mysqli_fetch_assoc($estados)){
+                                    echo '<option id="opt-estado-'.$row['clave_estado'].'" value="'.$row['clave_estado'].'"';
+                                    if($_POST['paciente_dir_estado'] == $row['clave_estado'])
+                                        echo ' selected';
+                                    echo '>'.$row['nombre_estado'];
+                                    echo '</option>';
+                                }
+                            else
+                                while($row = mysqli_fetch_assoc($estados)){
+                                    echo '<option id="opt-estado-'.$row['clave_estado'].'" value="'.$row['clave_estado'].'">';
+                                    echo $row['nombre_estado'];
+                                    echo '</option>';
+                                }
+                        ?>
+                    </select>
+                </div>
+                <div class="col">
+                    <label for="paciente_dir_municipio">
+                        <span>Municipio: </span>
+                    </label>
+                    <select type="text" id="paciente_dir_municipio" name="paciente_dir_municipio">
+                        <option value="0">---</option>
+                        <?php
+                            if(isset($_POST['paciente_dir_estado']) && isset($_POST['paciente_dir_municipio'])){
+                                $opciones = consulta_municipios($_POST['paciente_dir_estado']);
+                                while($row = mysqli_fetch_assoc($opciones)){
+                                    echo '<option id="opt-municipio-'.$row['clave_municipio'].'" value="'.$row['clave_municipio'].'"';
+                                    if($row['clave_municipio'] == $_POST['paciente_dir_municipio'])
+                                        echo ' selected';
+                                    echo '>'.$row['nombre_municipio'].'</option>';
+                                }
+                            }
+                        ?>
+                    </select>
+                </div>
+                <div class="col">
+                    <label for="paciente_dir_colonia">
+                        <span>Colonia/asentamiento: </span>
+                    </label>
+                    <select type="text" id="paciente_dir_colonia" name="paciente_dir_colonia">
+                        <option value="0">---</option>
+                        <?php
+                            if(isset($_POST['paciente_dir_colonia']) && isset($_POST['paciente_dir_cp'])){
+                                $opciones = consulta_asentamientos2($_POST['paciente_dir_cp']);
+                                while($row = mysqli_fetch_assoc($opciones)){
+                                    echo '<option';
+                                    if($row['nombre_asentamiento'] == $_POST['paciente_dir_colonia'])
+                                        echo ' selected';
+                                    echo '>'.$row['nombre_asentamiento'].'</option>';
+                                }
+                            }
+                        ?>
+                    </select>
                 </div>
             </div>
+            <div class="row row-cols-auto">
+                <div class="col">
+                    <label for="paciente_dir_calle_numero">
+                        <span>Calle y número: </span>
+                    </label>
+                    <input type="text" class="extender-ancho" id="paciente_dir_calle_numero" name="paciente_dir_calle_numero" value="<?php
+                        if(isset($_POST['paciente_dir_calle_numero'])){
+                            echo $_POST['paciente_dir_calle_numero'];
+                        }
+                    ?>">
+                </div>
+                <div class="col">
+                    <label for="paciente_dir_adicional">
+                        <span>Indicaciones adicionales: </span>
+                    </label>
+                    <input type="text" class="extender-ancho" id="paciente_dir_adicional" name="paciente_dir_adicional" value="<?php
+                        if(isset($_POST['paciente_dir_adicional'])){
+                            echo $_POST['paciente_dir_adicional'];
+                        }
+                    ?>">
+                </div>
+            </div>
+            <br>
             <div class="row row-cols-auto">
                 <div class="col">
                     <label for="paciente_fecha_nac">
@@ -212,7 +299,8 @@
                     ?>
                 </div>
             </div>
-            <h3><b>Inmunización</b></h3>
+            <br>
+            <h3><b>Inmunización (Vacunas)</b></h3>
             <div class="row row-cols-auto">
                 <div class="col">
                     <label for="inm_nombre">
@@ -777,6 +865,7 @@
         </div>
     </form>
     <script src="scripts-js/fecha-actual-consulta.js"></script>
+    <script src="scripts-js/direccion-paciente.js"></script>
 </body>
 
 </html>

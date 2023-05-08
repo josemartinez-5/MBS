@@ -115,3 +115,7 @@ header label{
     justify-content: end;
     margin: 4rem auto;
 }
+
+.extender-ancho {
+    min-width: 90%;
+}

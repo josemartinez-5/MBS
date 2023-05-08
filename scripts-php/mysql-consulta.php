@@ -3,26 +3,9 @@
 include 'mysql.php';
 $mysql = new mysql();
 
-$paciente_nombre = "";
-$fecha_1consulta = "";
-$paciente_tel = "";
-$paciente_tel_tipo = "";
-$paciente_email = "";
-$paciente_direccion = "";
-$paciente_fecha_nac = "";
-$paciente_edad = "";
-$paciente_hijos_status = "";
-$paciente_ocupacion = "";
-$paciente_nombre_comun = "";
-$APP_TX = "";
-$HEA = "";
-$AHF = "Artritis\nCáncer\nCardiopatías\nColesterol/triglicéridos\nDiabetes\nHTA\nEpilepsia\nMalformaciones\nObesidad\nTrastornos mentales\nToxicomanías\nITS\nTuberculosis\nOtros\nFallecimientos, edad y causa";
-$APNP = "Ejercicio\nGrupo Sanguíneo\nHospitalizado\nAdicciones: tabaco, alcohol, café\nMétodo anticonceptivo\nComidas al día\nConvivencia con animales\nDieta diaria\nInmunizaciones recientes";
-$APP = "Estudios de laboratorio\nTransfusiones de sangre\nEnfermedades actuales\nAlergias\nAsma\nArtritis\nCáncer\nHepátitis\nColesterol/triglícéridos\nDiabetes\nHTA\nMalformaciones\nTrastornos";
-$AGO = "Menarca\nMétodo anticonceptivo\nFecha última menstruación\nPartos (césarea, natural, abortos)\nITS\nInfertilidad\nEstudio Papanicolau";
 $num_consulta = 1;
 if(isset($_POST['num_consulta'])){
-	$$num_consulta = $_POST['num_consulta'];
+	$num_consulta = $_POST['num_consulta'];
 }
 if(isset($_POST['buscar_paciente'])){
 	if(strlen($_POST['paciente_nombre']) && strlen($_POST['fecha_1consulta'])){
@@ -33,7 +16,12 @@ if(isset($_POST['buscar_paciente'])){
 						`paciente`.`paciente_tel`,
 						`paciente`.`paciente_tel_tipo`,
 						`paciente`.`paciente_email`,
-						`paciente`.`paciente_direccion`,
+						`paciente`.`paciente_dir_cp`,
+						`paciente`.`paciente_dir_estado`,
+						`paciente`.`paciente_dir_municipio`,
+						`paciente`.`paciente_dir_colonia`,
+						`paciente`.`paciente_dir_calle_numero`,
+						`paciente`.`paciente_dir_adicional`,
 						`paciente`.`paciente_fecha_nac`,
 						`paciente`.`paciente_edad`,
 						`paciente`.`paciente_hijos_status`,
@@ -65,7 +53,12 @@ if(isset($_POST['buscar_paciente'])){
 			$_POST['paciente_tel'] = $fila['paciente_tel'];
 			$_POST['paciente_tel_tipo'] = $fila['paciente_tel_tipo'];
 			$_POST['paciente_email'] = $fila['paciente_email'];
-			$_POST['paciente_direccion'] = $fila['paciente_direccion'];
+			$_POST['paciente_dir_cp'] = $fila['paciente_dir_cp'];
+			$_POST['paciente_dir_estado'] = $fila['paciente_dir_estado'];
+			$_POST['paciente_dir_municipio'] = $fila['paciente_dir_municipio'];
+			$_POST['paciente_dir_colonia'] = $fila['paciente_dir_colonia'];
+			$_POST['paciente_dir_calle_numero'] = $fila['paciente_dir_calle_numero'];
+			$_POST['paciente_dir_adicional'] = $fila['paciente_dir_adicional'];
 			$_POST['paciente_fecha_nac'] = $fila['paciente_fecha_nac'];
 			$_POST['paciente_edad'] = $fila['paciente_edad'];
 			$_POST['paciente_hijos_status'] = $fila['paciente_hijos_status'];
@@ -212,5 +205,73 @@ function validar_datos(){
 		}
 	}
 	return true;
+}
+
+function consulta_estados(){
+	global $mysql;
+	$sql = "SELECT 
+				*
+			FROM
+				mbs.estado";
+	return $mysql->consulta($sql);
+}
+
+function consulta_municipios($estado){
+	global $mysql;
+	$sql = "SELECT 
+				municipio.clave_municipio,
+				municipio.nombre_municipio
+			FROM
+				mbs.municipio
+			WHERE
+				municipio.estado_municipio = '$estado'";
+	return $mysql->consulta($sql);
+}
+
+function consulta_asentamientos1($estado, $municipio){
+	global $mysql;
+	$sql = "SELECT
+				asentamiento.nombre_asentamiento,
+				asentamiento.cp_asentamiento
+			FROM
+				mbs.asentamiento
+					LEFT JOIN
+				mbs.codigo_postal ON asentamiento.cp_asentamiento = codigo_postal.cp
+			WHERE
+				codigo_postal.estado_cp = $estado AND codigo_postal.municipio_cp = $municipio";
+	return $mysql->consulta($sql);
+}
+
+function consulta_asentamientos2($cp){
+	global $mysql;
+	$sql = "SELECT 
+				asentamiento.nombre_asentamiento
+			FROM
+				mbs.asentamiento
+			WHERE
+				asentamiento.cp_asentamiento = $cp";
+	return $mysql->consulta($sql);
+}
+
+function obtener_estado($cp){
+	global $mysql;
+	$sql = "SELECT 
+				codigo_postal.estado_cp
+			FROM
+				mbs.codigo_postal
+			WHERE
+				codigo_postal.cp = '$cp'";
+	return mysqli_fetch_assoc($mysql->consulta($sql))['estado_cp'];
+}
+
+function obtener_municipio($cp){
+	global $mysql;
+	$sql = "SELECT 
+				codigo_postal.municipio_cp
+			FROM
+				mbs.codigo_postal
+			WHERE
+				codigo_postal.cp = '$cp'";
+	return mysqli_fetch_assoc($mysql->consulta($sql))['municipio_cp'];
 }
 ?>
