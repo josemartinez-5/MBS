@@ -45,6 +45,9 @@
         </div>
     </div>
 
+    <datalist id="lista_nombres"></datalist>
+    <datalist id="lista_fechas_1consulta"></datalist>
+
     <form method="POST" enctype="multipart/form-data" autocomplete="off">
 <!-- Ficha de identificación -->
         <div class="container my-4 ms-2 formulario">
@@ -54,25 +57,21 @@
                     <label for="paciente_nombre">
                         <span>Nombre completo: </span>
                     </label>
-                    <?php
-                        echo '<input type="text" id="paciente_nombre" name="paciente_nombre" size="40" value="';
+                    <input type="text" list="lista_nombres" id="paciente_nombre" name="paciente_nombre" size="40" value="<?php
                         if(isset($_POST['paciente_nombre'])){
                             echo $_POST['paciente_nombre'];
                         }
-                        echo'">';
-                    ?>
+                    ?>">
                 </div>
                 <div class="col-4">
                     <label for="fecha_1consulta">
                         <span>Fecha de 1a consulta: </span>
                     </label>
-                    <?php
-                        echo '<input type="date" id="fecha_1consulta" name="fecha_1consulta" max="" value="';
+                    <input type="date" list="lista_fechas_1consulta" id="fecha_1consulta" name="fecha_1consulta" max="" value="<?php
                         if(isset($_POST['fecha_1consulta'])){
                             echo $_POST['fecha_1consulta'];
                         }
-                        echo '">';
-                    ?>
+                    ?>">
                 </div>
                 <div class="col">
                     <button type="submit" style="padding-inline: 5px 5px;" name="buscar_paciente">Buscar paciente</button>
@@ -866,6 +865,7 @@
     </form>
     <script src="scripts-js/fecha-actual-consulta.js"></script>
     <script src="scripts-js/direccion-paciente.js"></script>
+    <script src="scripts-js/busqueda_automatica.js"></script>
 </body>
 
 </html>

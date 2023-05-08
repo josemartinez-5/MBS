@@ -47,4 +47,20 @@
             echo '</option>';
         }
     }
+
+    //Actualizar lista de nombres para escoger en el campo paciente_nombre
+    if(isset($_POST['termino_nombre'])){
+        $opciones = buscar_nombres_paciente($_POST['termino_nombre']);
+        while($row = mysqli_fetch_assoc($opciones)){
+            echo '<option value="'.$row['paciente_nombre'].'">';
+        }
+    }
+
+    //Obtener fecha(s) de primera consulta a partir del nombre del paciente
+    if(isset($_POST['nombre_para_fecha'])){
+        $opciones = buscar_fecha_1consulta($_POST['nombre_para_fecha']);
+        while($row = mysqli_fetch_assoc($opciones)){
+            echo '<option value="'.$row['fecha_1consulta'].'">';
+        }
+    }
 ?>

@@ -274,4 +274,26 @@ function obtener_municipio($cp){
 				codigo_postal.cp = '$cp'";
 	return mysqli_fetch_assoc($mysql->consulta($sql))['municipio_cp'];
 }
+
+function buscar_nombres_paciente($termino){
+	global $mysql;
+	$sql = "SELECT 
+				paciente.paciente_nombre
+			FROM
+				mbs.paciente
+			WHERE
+			paciente.paciente_nombre LIKE '%$termino%'";
+	return $mysql->consulta($sql);
+}
+
+function buscar_fecha_1consulta($nombre){
+	global $mysql;
+	$sql = "SELECT 
+				paciente.fecha_1consulta
+			FROM
+				mbs.paciente
+			WHERE
+			paciente.paciente_nombre = '$nombre'";
+	return $mysql->consulta($sql);
+}
 ?>
