@@ -1,89 +1,227 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Pagina con formulario para agendar nueva cita">
-    <title> Agendar cita </title>
-    <link href="styles/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="styles/agendar-cita.css">
-    <script src="https://kit.fontawesome.com/b85031486b.js" crossorigin="anonymous"></script>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>M&amp;B&amp;S Mint, Body and Spirit</title>
+	<style>
+		body {
+			background: linear-gradient(to right, #c9f7f5, #fff);
+			font-family: Arial, sans-serif;
+			margin: 0;
+			padding: 0;
+		}
+
+		#header {
+			background-color: #28a745;
+			color: #fff;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			padding: 10px;
+			font-size: 24px;
+			font-weight: bold;
+			box-shadow: 0 0 10px rgba(0,0,0,0.2);
+		}
+
+		#header h1 {
+			font-size: 20px;
+		}
+
+		#header .logo {
+			color: white;
+		}
+
+		#content {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			padding: 50px;
+			box-sizing: border-box;
+		}
+
+		#agenda {
+			font-size: 36px;
+			font-weight: bold;
+			margin-bottom: 50px;
+			color: #28a745;
+			text-align: center;
+		}
+
+		form {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			background-color: #fff;
+			padding: 50px;
+			box-shadow: 0 0 10px rgba(0,0,0,0.2);
+			border-radius: 10px;
+			width: 80%;
+			max-width: 600px;
+		}
+
+		form input[type="text"], form input[type="email"], form textarea, form input[type="tel"], form input[type="datetime-local"] {
+			font-size: 18px;
+			padding: 10px;
+			border-radius: 5px;
+			border: none;
+			margin-bottom: 20px;
+			width: 100%;
+			box-sizing: border-box;
+			box-shadow: 0 0 5px rgba(0,0,0,0.2);
+		}
+
+		form label {
+			font-size: 24px;
+			margin-bottom: 10px;
+			color: #28a745;
+			text-align: left;
+			width: 100%;
+		}
+
+		form span {
+			font-size: 24px;
+			margin-bottom: 10px;
+			color: #28a745;
+			text-align: left;
+			width: 100%;
+		}
+
+		form textarea {
+			height: 100px;
+		}
+
+		.button-container {
+			display: flex;
+			justify-content: flex-end;
+		}
+
+		.submit-button, .reset-button {
+			background-color: #8bc34a;
+			color: #fff;
+			border: none;
+			padding: 10px 20px;
+			font-size: 18px;
+			border-radius: 50px;
+			cursor: pointer;
+			width: 200px;
+			height: 50px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			position: relative;
+			box-shadow: 0 0 10px rgba(0,0,0,0.2);
+		}
+
+		.reset-button {
+			background-color: #dc3545;
+			margin-left: 20px;
+		}
+
+		form input[type="submit"], form input[type="reset"] {
+			background-color: #8bc34a;
+			color: #fff;
+			border: none;
+			padding: 10px 20px;
+			font-size: 18px;
+			border-radius: 50px;
+			cursor: pointer;
+			width: 200px;
+			height: 50px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			position: relative;
+			box-shadow: 0 0 10px rgba(0,0,0,0.2);
+		}
+
+		#footer {
+			background-color: #28a745;
+			color: #fff;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			padding: 10px;
+			font-size: 14px;
+			box-shadow: 0 0 10px rgba(0,0,0,0.2);
+		}
+
+		#footer a {
+			color: #fff;
+			text-decoration: none;
+			font-weight: bold;
+		}
+
+		@media screen and (max-width: 768px) {
+			form input[type="submit"], form input[type="reset"] {
+				width: 150px;
+				height: 40px;
+				font-size: 16px;
+				padding: 8px 16px;
+			}
+		}
+	</style>
+	<script src="scripts-js/jquery-3.6.4.min.js"></script>
 </head>
-
 <body>
-    <header>
-        <a href="#" class="logo">
-            <span>M&B&S</span> Mint, Body and Spirit
-        </a>
-        <input type="checkbox" id="menu">
-        <label for="menu" class="fa-solid fa-bars"></label>
-
-        <nav class="navbar">
-            <a href="principal.html">Regresar</a>
-        </nav>
-    </header>
-
-    <div class="primero container ms-2">
-        <div class="row">
-            <div class="col">
-                <h1 style="font-size: 4rem;">Agenda de cita</h1>
-            </div>
-        </div>
-    </div>
-
-    <div class="container my-4 ms-2 formulario">
-        <h2><b>Datos de paciente</b></h2>
-        <div class="row row-cols-auto mb-5">
-            <div class="col-6">
-                <label for="paciente_nombre">
-                    <span>Nombre completo: </span>
-                </label>
-                <input type="text" id="paciente_nombre" name="paciente_nombre" size="40">
-            </div>
-            <div class="col-4">
-                <label for="fecha_1consulta">
-                    <span>Fecha de 1a consulta: </span>
-                </label>
-                <input type="date" id="fecha_1consulta" name="fecha_1consulta" max="" value="">
-            </div>
-            <div class="col">
-                <button type="submit" style="padding-inline: 5px 5px;">Buscar paciente</button>
-            </div>
-        </div>
-        <h2><b>Establecer fecha y hora de próxima consulta</b></h2>
-        <div class="row row-cols-auto">
-            <div class="col">
-                <span>Núm. de próxima consulta para este paciente: 0</span>
-            </div>
-        </div>
-        <div class="row row-cols-auto">
-            <div class="col">
-                <label for="periodicidad">
-                    <span>Consulta con el paciente cada </span>
-                </label>
-                <input type="number" id="periodicidad" name="periodicidad" size="3">
-                <span> semanas</span>
-            </div>
-            <div class="col">
-                <button type="submit" style="padding-inline: 5px 5px;">Cambiar periodicidad</button>
-            </div>
-        </div>
-        <div class="row row-cols-auto">
-            <div class="col">
-                <label for="proxima_consulta">
-                    <span>Fecha y hora: </span>
-                </label>
-                <input type="datetime-local" id="proxima_consulta" name="proxima_consulta" min="" value="">
-            </div>
-        </div>        
-    </div>
-
-    <div class="container ms-2 ultimo">
-        <button class="submit" type="submit">Guardar nueva cita</button>
-    </div>
-
+	<header id="header">
+		<h1 class="logo">M&amp;B&amp;S Mint Body and Spirit</h1>
+		<a href="principal.html">Regresar</a>
+	</header>
+	<datalist id="lista_nombres"></datalist>
+	<datalist id="lista_fechas_1consulta"></datalist>
+	<main id="content">
+		<h2 id="agenda">Agenda tu cita</h2>
+		<form action="scripts-php/mysql-agendar-cita.php" method="post">
+			<div id="nuevo_paciente">
+				<span>¿Nuevo paciente?</span>
+				<label for="nuevo_paciente_si">
+					<input type="radio" id="nuevo_paciente_si" name="nuevo_paciente" value="1" checked>
+					Sí
+				</label>
+				<label for="nuevo_paciente_no">
+					<input type="radio" id="nuevo_paciente_no" name="nuevo_paciente" value="0">
+					No
+				</label>
+			</div>
+			<br>
+			<label for="nombre">Nombre completo:</label>
+			<input type="text" name="nombre" id="nombre" list="lista_nombres" required>
+			<div id="div_fecha_1consulta" hidden>
+				<label for="fecha_1consulta">Fecha de 1a consulta:</label>
+				<input type="date" list="lista_fechas_1consulta" id="fecha_1consulta" name="fecha_1consulta">
+			</div>
+			<br>
+			<div id="div_num_consulta" hidden>
+				<span>Núm. de próxima consulta para este paciente: </span>
+				<span id="num_consulta">0</span>
+			</div>
+			<br>
+			<label for="edad">Edad:</label>
+			<input type="text" name="edad" id="edad" required maxlength="3">
+			<label for="email">Correo electrónico:</label>
+			<input type="email" name="email" id="email" required>
+			<label for="telefono">Teléfono/Celular:</label>
+			<input type="tel" name="telefono" id="telefono" required>
+			<div id="div_periodicidad" hidden>
+				<span>Citas cada </span>
+				<input type="number" name="periodicidad" id="periodicidad" style="font-size: 18px;">
+				<span> semanas</span>
+			</div>
+			<br>
+			<label for="fecha_hora">Fecha y hora de la proxima cita:</label>
+			<input type="datetime-local" name="fecha_hora" id="fecha_hora" required>
+			<label for="comentarios">Comentarios:</label>
+			<textarea name="comentarios" id="comentarios"></textarea>
+			<div class="button-container">
+				<input type="submit" value="Agendar cita" class="submit-button">
+				<input type="reset" value="Limpiar campos" class="reset-button">
+			</div>
+		</form>
+	</main>
+	<footer id="footer">
+		<p>© 2023 M&B&S Mint, Body and Spirit | Todos los derechos reservados</p>
+	</footer>
+	<script src="scripts-js/nuevo-paciente-cita.js"></script>
 </body>
-
 </html>

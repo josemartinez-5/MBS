@@ -63,4 +63,14 @@
             echo '<option value="'.$row['fecha_1consulta'].'">';
         }
     }
+
+    //Obtener datos para agendar nueva cita de paciente ya existente
+    if(isset($_POST['nombre_datos_cita'])){
+        $datos = datos_cita($_POST['nombre_datos_cita'],$_POST['fecha_1consulta_datos_cita']);
+        echo $datos['paciente_edad']."\n";
+        echo $datos['paciente_email']."\n";
+        echo $datos['paciente_tel']."\n";
+        echo $datos['periodicidad']."\n";
+        echo $datos['ultima_consulta'];
+    }
 ?>

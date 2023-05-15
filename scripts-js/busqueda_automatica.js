@@ -32,7 +32,3 @@ function input_paciente_nombre(){
         lista_nombres.innerHTML = "";
     }
 }
-
-function change_paciente_nombre(){
-    console.log("Cambio nombre paciente");
-}

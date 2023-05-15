@@ -277,7 +277,7 @@ function obtener_municipio($cp){
 
 function buscar_nombres_paciente($termino){
 	global $mysql;
-	$sql = "SELECT 
+	$sql = "SELECT DISTINCT 
 				paciente.paciente_nombre
 			FROM
 				mbs.paciente
@@ -295,5 +295,24 @@ function buscar_fecha_1consulta($nombre){
 			WHERE
 			paciente.paciente_nombre = '$nombre'";
 	return $mysql->consulta($sql);
+}
+
+function datos_cita($nombre, $fecha_1consulta){
+	global $mysql;
+	$sql = "SELECT 
+				paciente.paciente_edad,
+				paciente.paciente_email,
+				paciente.paciente_tel,
+				paciente.periodicidad,
+				MAX(consulta.num_consulta) AS ultima_consulta
+			FROM
+				mbs.paciente 
+					LEFT JOIN
+				mbs.consulta ON paciente.paciente_nombre = consulta.paciente_nombre AND paciente.fecha_1consulta = consulta.fecha_1consulta
+			WHERE
+				paciente.paciente_nombre = '$nombre' AND paciente.fecha_1consulta = '$fecha_1consulta'
+			GROUP BY
+				paciente_edad, paciente_email, paciente_tel, periodicidad";
+	return mysqli_fetch_assoc($mysql->consulta($sql)); 
 }
 ?>

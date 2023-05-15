@@ -16,6 +16,15 @@ class mysql {
         $resultado = mysqli_query($this->_conexion,$sql);
         return $resultado;
     }
+    public function connect_error(){
+        $this->$_conexion->connect_error;
+    }
+    public function close(){
+        $this->$_conexion->close;
+    }
+    public function error(){
+        $this->$_conexion->error;
+    }
 }
 
 ?>

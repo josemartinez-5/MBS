@@ -33,8 +33,10 @@
 
         <nav class="navbar">
             <a href="principal.html">Regresar</a>
-            <a href="#" hidden>Guardar</a>
         </nav>
+        <div>
+            <button name="buscar_paciente">Ficha de identificación</button>
+        </div>
     </header>
 
     <div class="primero container ms-2">
@@ -241,7 +243,7 @@
                     </label>
                     <?php
                         echo '<input type="date" id="paciente_fecha_nac" name="paciente_fecha_nac" max="" value="';
-                        if(isset($_POST['paciente_fecha_nac'])){
+                        if(isset($_POST['paciente_fecha_nac']) && $_POST['paciente_fecha_nac'] != '1001-01-01'){
                             echo $_POST['paciente_fecha_nac'];
                         }
                         echo '">';
