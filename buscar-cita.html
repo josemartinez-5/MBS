@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Buscar citas</title>
+	<style>
+		body {
+			background: linear-gradient(to right, #c9f7f5, #fff);
+			font-family: Arial, sans-serif;
+			margin: 0;
+			padding: 0;
+			min-height: 100vh;
+			position: relative;
+		}
+
+		#header {
+			background-color: #28a745;
+			color: #fff;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			padding: 10px;
+			font-size: 24px;
+			font-weight: bold;
+			box-shadow: 0 0 10px rgba(0,0,0,0.2);
+		}
+
+		#header h1 {
+			font-size: 20px;
+		}
+
+		#header .logo {
+			color: white;
+		}
+
+		#content {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			padding: 50px;
+			box-sizing: border-box;
+			flex: 1 0 auto;
+		}
+
+		h2 {
+			font-size: 36px;
+			font-weight: bold;
+			margin-bottom: 50px;
+			color: #28a745;
+			text-align: center;
+		}
+
+		form {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			background-color: #fff;
+			padding: 50px;
+			box-shadow: 0 0 10px rgba(0,0,0,0.2);
+			border-radius: 10px;
+			width: 80%;
+			max-width: 600px;
+		}
+
+		form input[type="text"] {
+			font-size: 18px;
+			padding: 10px;
+			border-radius: 5px;
+			border: none;
+			margin-bottom: 20px;
+			width: 100%;
+			box-sizing: border-box;
+			box-shadow: 0 0 5px rgba(0,0,0,0.2);
+		}
+
+		form label {
+			font-size: 24px;
+			margin-bottom: 10px;
+			color: #28a745;
+			text-align: left;
+			width: 100%;
+		}
+
+		form input[type="submit"] {
+			background-color: #8bc34a;
+			color: #fff;
+			border: none;
+			padding: 10px 20px;
+			font-size: 18px;
+			border-radius: 50px;
+			cursor: pointer;
+			width: 200px;
+			height: 50px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			position: relative;
+			box-shadow: 0 0 10px rgba(0,0,0,0.2);
+		}
+
+		#resultados {
+			margin-top: 50px;
+			width: 80%;
+			max-width: 600px;
+			background-color: #fff;
+			box-shadow: 0 0 10px rgba(0,0,0,0.2);
+			border-radius: 10px;
+			padding: 20px;
+			display: none;
+		}
+
+		#resultados table {
+			width: 100%;
+			border-collapse: collapse;
+			box-shadow: 0 0 10px rgba(0,0,0,0.2);
+			background-color: #fff;
+			border-radius: 10px;
+			overflow: hidden;
+			margin-top: 20px;
+		}
+
+		#resultados table th, #resultados table td {
+			border: 1px solid #ddd;
+			padding: 10px;
+			text-align: left;
+		}
+
+		#resultados table th {
+			background-color: #28a745;
+			color: #fff;
+			padding: 15px;
+			font-size: 18px;
+		}
+
+		#resultados table td {
+			background-color: #c9f7f5;
+		}
+
+		#resultados table tr:hover td {
+			background-color: #bdecb6;
+		}
+
+		#resultados table tr:nth-child(even) td {
+			background-color: #fff;
+		}
+
+		#resultados p {
+			margin-top: 10px;
+		}
+
+		@media screen and (max-width: 768px) {
+			form input[type="submit"] {
+				width: 150px;
+				height: 40px;
+				font-size: 16px;
+				padding: 8px 16px;
+			}
+		}
+
+		#footer {
+			background-color: #28a745;
+			color: #fff;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			padding: 10px;
+			font-size: 14px;
+			box-shadow: 0 0 10px rgba(0,0,0,0.2);
+			position: absolute;
+			bottom: 0;
+			width: 100%;
+		}
+	</style>
+</head>
+<body>
+	<header id="header">
+		<h1 class="logo">M&amp;B&amp;S Mint Body and Spirit</h1>
+		<a href="principal.html">Regresar</a>
+	</header>
+	<main id="content">
+		<h2>Buscar citas</h2>
+		<form action="scripts-php/buscar-citas.php" method="post">
+			<label for="nombre">Nombre del paciente:</label>
+			<input type="text" name="nombre" id="nombre">
+			<input type="submit" value="Buscar">
+		</form>
+		<div id="resultados">
+			<table>
+				<thead>
+					<tr>
+						<th colspan="2">M&amp;B&amp;S Mint, Body and Spirit</th>
+					</tr>
+					<tr>
+						<th>Nombre</th>
+						<th>Fecha de la cita</th>
+					</tr>
+				</thead>
+				<tbody>
+					<!-- Aquí se mostrarán los resultados de la búsqueda -->
+				</tbody>
+			</table>
+			<p>No se encontraron resultados.</p>
+		</div>
+	</main>
+	<footer id="footer">
+		<p>&copy; 2023 M&amp;B&amp;S Mint, Body and Spirit | Todos los derechos reservados </a></p>
+	</footer>
+</body>
+</html>
