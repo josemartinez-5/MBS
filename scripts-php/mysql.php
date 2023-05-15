@@ -17,13 +17,13 @@ class mysql {
         return $resultado;
     }
     public function connect_error(){
-        $this->$_conexion->connect_error;
+        $this->_conexion->connect_error;
     }
     public function close(){
-        $this->$_conexion->close;
+        $this->_conexion->close();
     }
     public function error(){
-        $this->$_conexion->error;
+        $this->_conexion->error;
     }
 }
 
