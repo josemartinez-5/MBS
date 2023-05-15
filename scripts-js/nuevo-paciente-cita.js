@@ -76,7 +76,6 @@ function change_fecha_1consulta(){
         data: {nombre_datos_cita: nombre.value,
             fecha_1consulta_datos_cita: fecha_1consulta.value}
     }).done(function (response){
-        console.log(response);
         let datos = response.split("\n");
         let d = new Date();
         edad.value = datos[0];

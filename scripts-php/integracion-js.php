@@ -73,4 +73,28 @@
         echo $datos['periodicidad']."\n";
         echo $datos['ultima_consulta'];
     }
+
+    //Listas de documentos y fechas de estudios a partir del nombre y fecha de 1a consulta
+    if(isset($_POST['paciente_nombre_estudio'])){
+        $opciones = obtener_datos_estudio($_POST['paciente_nombre_estudio'], $_POST['fecha_1consulta_estudio']);
+        while($row = mysqli_fetch_assoc($opciones)){
+            echo '<option value="'.$row['estudio_doc'].'">';
+        }
+        echo "\n";
+        $opciones->data_seek(0);
+        while($row = mysqli_fetch_assoc($opciones)){
+            echo '<option value="'.$row['estudio_fecha'].'">';
+        }
+    }
+
+    //Lista de parámetros de un estudio a partir de nombre, fecha de 1a consulta y fecha del estudio
+    if(isset($_POST['paciente_nombre_parametro'])){
+        $parametros = obtener_parametros_estudio($_POST['paciente_nombre_parametro'],$_POST['fecha_1consulta_parametro'],$_POST['estudio_fecha_parametro']);
+        if($parametros->num_rows > 0){
+            while($row = mysqli_fetch_assoc($parametros)){
+                foreach($row as $campo)
+                    echo $campo."\n";
+            }
+        }
+    }
 ?>

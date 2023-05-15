@@ -315,4 +315,30 @@ function datos_cita($nombre, $fecha_1consulta){
 				paciente_edad, paciente_email, paciente_tel, periodicidad";
 	return mysqli_fetch_assoc($mysql->consulta($sql)); 
 }
+
+function obtener_datos_estudio($nombre, $fecha_1consulta){
+	global $mysql;
+	$sql = "SELECT 
+				estudio.estudio_doc,
+				estudio.estudio_fecha
+			FROM
+				mbs.estudio 
+			WHERE
+				estudio.paciente_nombre = '$nombre' AND estudio.fecha_1consulta = '$fecha_1consulta'";
+	return $mysql->consulta($sql);
+}
+
+function obtener_parametros_estudio($nombre, $fecha_1consulta, $estudio_fecha){
+	global $mysql;
+	$sql = "SELECT 
+				estudio_parametro.param_nombre,
+				estudio_parametro.param_valor,
+				estudio_parametro.param_rango,
+				estudio_parametro.param_observacion
+			FROM
+				mbs.estudio_parametro
+			WHERE
+				estudio_parametro.paciente_nombre = '$nombre' AND estudio_parametro.fecha_1consulta = '$fecha_1consulta' AND estudio_parametro.estudio_fecha = '$estudio_fecha'";
+	return $mysql->consulta($sql);
+}
 ?>
