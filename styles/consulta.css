@@ -47,7 +47,7 @@ div {
 }
 
 .primero div {
-    margin-top: 7rem;
+    margin-top: 9rem;
 }
 
 .formulario {
@@ -68,7 +68,7 @@ header{
     background-color: darkgreen;
     box-shadow: 0 .5rem 1rem rgb(132, 161, 132);
     padding: 2rem 9%;
-    display: flex;
+    /* display: flex; */
     align-items: center;
     justify-content: space-between;
     z-index: 1000;
@@ -76,11 +76,12 @@ header{
 
 header .logo{
     font-size: 25px;
-    color: #fff;
+    color: var(--verdeClaro);
 }
 
 header span{
-    color: var(--verdeClaro);
+    display: flex;
+    justify-content: space-between;
 }
 
 header .navbar a{
@@ -92,17 +93,10 @@ header .navbar a{
 header .navbar a:hover{
     color: var(--verdeClaro);
 }
-header input{
-    display: none;
 
-}
-
-header label{
-    font-size: 8rem;
-    color: var(--verde);
-    cursor: pointer;
-    visibility: hidden;
-    opacity: 0;
+header div{
+    display: flex;
+    justify-content: space-between;
 }
 
 .largeinput{
@@ -118,4 +112,20 @@ header label{
 
 .extender-ancho {
     min-width: 90%;
+}
+
+.tablink {
+    background-color: darkgreen;
+    color: white;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    font-size: 17px;
+    width: 25%;
+}
+  
+.tablink:hover {
+    background-color: var(--verdeClaro);
 }

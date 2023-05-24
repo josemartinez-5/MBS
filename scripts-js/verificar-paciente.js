@@ -73,6 +73,7 @@ function change_estudio_doc(){
             rellenar_parametros();
             return;
         }
+    limpiar_parametros();
 }
 
 function change_estudio_fecha(){
@@ -83,6 +84,7 @@ function change_estudio_fecha(){
             estudio_doc.value = lista_estudio_doc.getElementsByTagName("option")[i].value;
             return;
         }
+    limpiar_parametros();
 }
 
 function click_btn_agregar_parametro(){
@@ -136,4 +138,13 @@ function rellenar_parametros(){
             btn_agregar_parametro.click();
         }
     });
+}
+
+function limpiar_parametros(){
+    for(let j=1; j<=num_parametros; j++){
+        document.getElementById("param_nombre"+j).value = "";
+        document.getElementById("param_valor"+j).value = "";
+        document.getElementById("param_rango"+j).value = "";
+        document.getElementById("param_observacion"+j).value = "";
+    }
 }
