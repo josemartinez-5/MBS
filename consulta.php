@@ -25,17 +25,22 @@
 
 <body>
     <header>
-        <a href="#" class="logo">
-            <span>M&B&S</span> Mint, Body and Spirit
-        </a>
-        <input type="checkbox" id="menu">
-        <label for="menu" class="fa-solid fa-bars"></label>
+        <span>
+            <a href="#" class="logo">
+                M&B&S Mint, Body and Spirit
+            </a>
 
-        <nav class="navbar">
-            <a href="principal.html">Regresar</a>
-        </nav>
+            <nav class="navbar">
+                <a href="principal.html">Regresar</a>
+            </nav>
+        </span>
         <div>
-            <button name="buscar_paciente">Ficha de identificación</button>
+            <button class="tablink" id="tab_ficha_identificacion">Ficha de identificación</button>
+            <button class="tablink" id="tab_identificacion_consulta">Identificación de consulta</button>
+            <button class="tablink" id="tab_motivos_etc">Motivos, síntomas y antecendentes</button>
+            <button class="tablink" id="tab_examen_fisico">Examen físico</button>
+            <button class="tablink" id="tab_recomendaciones_tratamiento">Recomendaciones y tratamiento</button>
+            <button class="tablink" id="tab_cobro">Cobro</button>
         </div>
     </header>
 
@@ -52,7 +57,7 @@
 
     <form method="POST" enctype="multipart/form-data" autocomplete="off">
 <!-- Ficha de identificación -->
-        <div class="container my-4 ms-2 formulario">
+        <div class="container my-4 ms-2 formulario tabcontenido">
             <h2><b>Ficha de identificación</b></h2>
             <div class="row row-cols-auto">
                 <div class="col-6">
@@ -337,7 +342,7 @@
         </div>
 
 <!-- Identificación de consulta -->
-        <div class="container my-4 ms-2 formulario">
+        <div class="container my-4 ms-2 formulario tabcontenido">
             <h2><b>Identificación de consulta</b></h2>
             <div class="row row-cols-auto">
                 <div class="col">
@@ -366,7 +371,7 @@
         </div>
 
 <!-- Motivos, síntomas y antecedentes -->
-        <div class="container my-4 ms-2 formulario">
+        <div class="container my-4 ms-2 formulario tabcontenido">
             <h2><b>Motivos, síntomas y antecendentes</b></h2>
             <div class="row row-cols-auto">
                 <div class="col">
@@ -662,7 +667,7 @@
         </div>
 
 <!-- Examen físico -->
-        <div class="container my-4 ms-2 formulario">
+        <div class="container my-4 ms-2 formulario tabcontenido">
             <h2><b>Examen físico</b></h2>
             <div class="row row-cols-auto">
                 <div class="col">
@@ -804,7 +809,7 @@
         </div>
 
 <!-- Recomendaciones y tratamiento -->
-        <div class="container my-4 ms-2 formulario">
+        <div class="container my-4 ms-2 formulario tabcontenido">
             <h2><b>Recomendaciones y tratamiento</b></h2>
             <div class="row row-cols-auto">
                 <div class="col">
@@ -839,7 +844,7 @@
         </div>
 
 <!-- Ingresos de consulta -->
-        <div class="container my-4 ms-2 formulario">
+        <div class="container my-4 ms-2 formulario tabcontenido">
             <h2><b>Cobro de consulta y tratamiento</b></h2>
             <div class="row row-cols-auto">
                 <div class="col">
@@ -854,9 +859,9 @@
                         echo '">';
                     ?>
                 </div>
-                <div class="col">
+                <!-- <div class="col">
                     <button type="submit" style="padding-inline: 5px 5px;">Guardar dato</button>
-                </div>
+                </div> -->
             </div>
         </div>
 
@@ -868,6 +873,7 @@
     <script src="scripts-js/fecha-actual-consulta.js"></script>
     <script src="scripts-js/direccion-paciente.js"></script>
     <script src="scripts-js/busqueda_automatica.js"></script>
+    <script src="scripts-js/tabs.js"></script>
 </body>
 
 </html>
